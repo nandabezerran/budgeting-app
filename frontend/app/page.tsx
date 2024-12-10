@@ -1,6 +1,23 @@
+"use client"
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Home() {
+  const [data, setData] = useState("");
+
+  // Fetch data from the backend
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -47,6 +64,12 @@ export default function Home() {
           >
             Read our docs
           </a>
+        </div>
+
+        {/* Display fetched data */}
+        <div className="mt-8 text-center sm:text-left">
+          <h2 className="text-lg font-bold">Backend Data:</h2>
+          <p>{data || "Loading..."}</p>
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
