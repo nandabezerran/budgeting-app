@@ -3,7 +3,7 @@ import cors from 'cors';
 import pkg from "pg";
 const { Pool } = pkg;
 import dotenv from "dotenv";
-import itemsRoute from './routes/items';
+import itemsRoute from './src/routes/items';
 
 dotenv.config();
 
