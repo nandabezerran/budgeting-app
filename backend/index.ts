@@ -4,6 +4,7 @@ import pkg from "pg";
 const { Pool } = pkg;
 import dotenv from "dotenv";
 import itemsRoute from './src/routes/items';
+import "reflect-metadata"
 
 dotenv.config();
 
