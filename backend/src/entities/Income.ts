@@ -3,7 +3,7 @@ import "reflect-metadata";
 import { Account } from "./Account";
 
 @Entity()
-export class Expense {
+export class Income {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -15,9 +15,6 @@ export class Expense {
 
     @Column({ nullable: true })
     description: string;
-
-    @Column()
-    budgetType: string;
 
     @ManyToOne(() => Account)
     @Column()

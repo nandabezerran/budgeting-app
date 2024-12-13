@@ -11,4 +11,10 @@ export class Account {
 
     @Column()
     type: string;
+
+    @OneToMany(() => Expense, (expense) => expense.account, { cascade: true })
+    expenses: Expense[];
+
+    @OneToMany(() => Income, (income) => income.account, { cascade: true })
+    incomes: Income[];
 }
