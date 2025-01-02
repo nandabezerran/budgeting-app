@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import '../frontend/app/globals.css';
 
 const nextConfig: NextConfig = {
   /* config options here */
