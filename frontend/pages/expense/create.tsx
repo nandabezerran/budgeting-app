@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
 export default function ExpenseCreate() {
+    /**
+     * State Management 
+     * Initializes formData with default values
+     * setFormData: function to update the formData state
+    **/
     const [formData, setFormData] = useState({
         value: '',
         date: '',
@@ -8,6 +13,12 @@ export default function ExpenseCreate() {
         accountId: '',
     });
 
+    //Event Handlers
+    /**
+     * Updates formData whenever an input field changes
+     * e.target.name: refers to the name attribute of the input to identify which field is being updated
+     * e.target.value: the new value of the input field
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData({
@@ -16,6 +27,9 @@ export default function ExpenseCreate() {
         });
     };
 
+    /**
+     * Submits formData
+     */
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Expense Submitted:', formData);

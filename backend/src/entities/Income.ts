@@ -1,23 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import "reflect-metadata";
 import { Account } from "./Account";
 
 @Entity()
 export class Income {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column("decimal", { precision: 10, scale: 2 })
-    value: number;
+    value!: number;
 
-    @Column()
-    date: Date;
+    @Column({ type: "timestamp" })
+    date!: Date;
 
-    @Column({ nullable: true })
-    description: string;
+    @Column({ type: "varchar", length: 255, nullable: true })
+    description!: string;
 
     @ManyToOne(() => Account)
-    @Column()
-    account: Account;
+    account!: Account;
 
 }

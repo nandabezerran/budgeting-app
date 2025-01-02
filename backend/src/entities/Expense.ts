@@ -1,26 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import "reflect-metadata";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from "typeorm";
 import { Account } from "./Account";
 
 @Entity()
-export class Expense {
+export class Expense extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column("decimal", { precision: 10, scale: 2 })
-    value: number;
+    value!: number;
 
-    @Column()
-    date: Date;
+    @Column({ type: "timestamp" })
+    date!: Date;
 
-    @Column({ nullable: true })
-    description: string;
+    @Column({ type: "varchar", length: 255, nullable: true })
+    description!: string;
 
-    @Column()
-    budgetType: string;
+    @Column("enum")
+    budgetType!: string;
 
     @ManyToOne(() => Account)
-    @Column()
-    account: Account;
+    account!: Account;
 
 }
