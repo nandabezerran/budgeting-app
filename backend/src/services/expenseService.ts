@@ -1,10 +1,10 @@
 import { Expense } from '../entities/Expense'; // Assuming you have an Expense model
 
 export async function saveExpense(data: {
-    value: number;
-    date: Date;
+    value: number | null;
+    date: Date | null;
     description?: string;
-    accountId: number;
+    accountId: number | null;
 }) {
     if (!data.value || !data.date || !data.accountId) {
         throw new Error('Validation error: Missing required fields');

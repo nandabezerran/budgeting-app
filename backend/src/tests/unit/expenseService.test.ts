@@ -29,14 +29,14 @@ describe('saveExpense', () => {
         expect(Expense.prototype.save).toHaveBeenCalledTimes(1);
     });
 
-    // it('should throw an error if required fields are missing', async () => {
-    //     const expenseData = {
-    //         value: null,
-    //         date: new Date(),
-    //         description: 'Groceries',
-    //         accountId: 1,
-    //     };
+    it('should throw an error if required fields are missing', async () => {
+        const expenseData = {
+            value: null,
+            date: new Date(),
+            description: 'Groceries',
+            accountId: 1,
+        };
 
-    //     await expect(saveExpense(expenseData)).rejects.toThrow('Validation error');
-    // });
+        await expect(saveExpense(expenseData)).rejects.toThrow('Validation error');
+    });
 });
