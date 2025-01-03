@@ -4,6 +4,7 @@ import pkg from "pg";
 const { Pool } = pkg;
 import dotenv from "dotenv";
 import itemsRoute from './src/routes/items';
+import expenseRoute from './src/routes/expense'
 import "reflect-metadata"
 
 dotenv.config();
@@ -20,24 +21,29 @@ const pool = new Pool({
     database: process.env.DB_NAME,
 });
 
-// Test database connection
-pool.connect((err, client, release) => {
-    if (err) {
-        return console.error("Error acquiring client", err.stack);
-    }
-    console.log("PostgreSQL connected!");
-    release();
-});
-
+// Test database connection (only run in non-test environments)
+if (process.env.NODE_ENV !== 'test') {
+    pool.connect((err, client, release) => {
+        if (err) {
+            return console.error("Error acquiring client", err.stack);
+        }
+        release();
+    });
+}
 
 app.use(cors());
 app.use(express.json());
-app.use('/api', itemsRoute);
+
+app.use('/api/items', itemsRoute);
+app.use('/api/expense', expenseRoute);
+console.log('Expense route registered at /api/expense');
 
 app.get('/', (req, res) => {
     res.send('Hello from the backend!');
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    // console.log(`Server is running on port ${PORT}`);
 });
+
+export default app;
