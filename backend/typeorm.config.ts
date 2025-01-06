@@ -10,7 +10,7 @@ const AppDataSource = new DataSource({
     database: 'budgeting-app',
     synchronize: true, // if true, automatic schema synchronization will be enabled
     logging: false,
-    entities: ["src/modules/**/*.entity.{ts,js}"],  // path to your entities (typescript files)
+    entities: ["src/entities/*.{ts,js}"],  // path to your entities (typescript files)
     migrations: [
         "src/migrations/**/*.{ts,js}"
     ],

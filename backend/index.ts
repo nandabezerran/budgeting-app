@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import itemsRoute from './src/routes/items';
 import expenseRoute from './src/routes/expense'
 import "reflect-metadata"
+import AppDataSource from './typeorm.config';
 
 dotenv.config();
 
@@ -20,6 +21,20 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
 });
+
+// Initialize the DataSource
+AppDataSource.initialize()
+    .then(() => {
+        console.log('DataSource has been initialized!');
+        // Start the server only after the DataSource is ready
+        app.listen(3000, () => {
+            console.log('Server is running on http://localhost:3000');
+        });
+    })
+    .catch((err) => {
+        console.error('Error during DataSource initialization:', err);
+    });
+
 
 // Test database connection (only run in non-test environments)
 if (process.env.NODE_ENV !== 'test') {

@@ -1,6 +1,6 @@
 export enum BudgetType {
-    Needs = "Needs",
-    Wants = "Wants",
-    Savings = "Savings",
-    Debts = "Debts"
+    NEEDS = "Needs",
+    WANTS = "Wants",
+    SAVINGS = "Savings",
+    DEBTS = "Debts"
 }

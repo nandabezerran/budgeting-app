@@ -27,13 +27,37 @@ export default function ExpenseCreate() {
         });
     };
 
+    const [responseMessage, setResponseMessage] = useState('');
+
+
     /**
      * Submits formData
      */
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Expense Submitted:', formData);
-        // Add API integration here
+        try {
+            const response = await fetch('/api/expense', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setResponseMessage('Expense submitted successfully!');
+                console.log('Response from API:', data);
+            } else {
+                const errorData = await response.json();
+                setResponseMessage(`Error: ${errorData.error}`);
+                console.error('Error submitting expense:', errorData);
+            }
+        } catch (error) {
+            setResponseMessage('An unexpected error occurred.');
+            console.error('Unexpected error:', error);
+        }
     };
 
     const containerStyle = {

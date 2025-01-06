@@ -4,17 +4,17 @@ import "reflect-metadata";
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
-    @Column()
-    firstName: string;
+    @Column({ type: "varchar", length: 255 })
+    firstName!: string;
 
-    @Column()
-    lastName: string;
+    @Column({ type: "varchar", length: 255 })
+    lastName!: string;
 
-    @Column()
-    password: string;
+    @Column({ type: "varchar", length: 255 })
+    password!: string;
 
-    @Column()
-    email: string;
+    @Column({ type: "varchar", length: 255 })
+    email!: string;
 }

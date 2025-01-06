@@ -4,15 +4,15 @@ import "reflect-metadata";
 @Entity()
 export class Category {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
-    @Column()
-    name: string;
+    @Column({ type: "varchar", length: 255 })
+    name!: string;
 
-    @Column()
-    description: string;
+    @Column({ type: "varchar", length: 255 })
+    description!: string;
 
-    @Column()
-    color: string;
+    @Column({ type: "varchar", length: 8 })
+    color!: string;
 
 }
