@@ -23,7 +23,7 @@ export class Expense extends BaseEntity {
     })
     budgetType!: string;
 
-    @ManyToOne(() => Account)
+    @ManyToOne(() => Account, (account) => account.expenses, { nullable: false })
     account!: Account;
 
 }
