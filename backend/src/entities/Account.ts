@@ -1,11 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity } from "typeorm";
 import "reflect-metadata";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
 import { AccountType } from "../enums/AccountType";
 
 @Entity()
-export class Account {
+export class Account extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 

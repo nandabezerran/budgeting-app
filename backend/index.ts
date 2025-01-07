@@ -5,6 +5,7 @@ const { Pool } = pkg;
 import dotenv from "dotenv";
 import itemsRoute from './src/routes/items';
 import expenseRoute from './src/routes/expense'
+import accountRoute from './src/routes/account'
 import "reflect-metadata"
 import AppDataSource from './typeorm.config';
 
@@ -22,7 +23,7 @@ const pool = new Pool({
     database: process.env.DB_NAME,
 });
 
-// Initialize the DataSource
+// // Initialize the DataSource
 AppDataSource.initialize()
     .then(() => {
         console.log('DataSource has been initialized!');
@@ -51,7 +52,7 @@ app.use(express.json());
 
 app.use('/api/items', itemsRoute);
 app.use('/api/expense', expenseRoute);
-console.log('Expense route registered at /api/expense');
+app.use('/api/account', accountRoute);
 
 app.get('/', (req, res) => {
     res.send('Hello from the backend!');
