@@ -1,25 +1,27 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
+import "reflect-metadata";
+import { DataSource } from "typeorm";
+
+const isTestEnv = process.env.NODE_ENV === "test";
 
 const AppDataSource = new DataSource({
-    type: "postgres", // database type (e.g., mysql, postgres)
-    host: 'localhost',
-    port: 5432, // port for the database
-    username: 'postgres',
-    password: 'admin',
-    database: 'budgeting-app',
-    synchronize: true, // if true, automatic schema synchronization will be enabled
+    type: isTestEnv ? "sqlite" : "postgres",
+    host: isTestEnv ? undefined : process.env.DATABASE_HOST || "localhost",
+    port: isTestEnv ? undefined : parseInt(process.env.DATABASE_PORT || "5432"),
+    username: isTestEnv ? undefined : process.env.DATABASE_USER || "postgres",
+    password: isTestEnv ? undefined : process.env.DATABASE_PASSWORD || "admin",
+    database: isTestEnv ? ":memory:" : process.env.DATABASE_NAME || "budgeting-app",
+    synchronize: isTestEnv || true, // Automatically sync schema in test mode
     logging: false,
-    entities: ["src/entities/*.{ts,js}"],  // path to your entities (typescript files)
-    migrations: [
-        "src/migrations/**/*.{ts,js}"
-    ],
+    entities: ["src/entities/*.{ts,js}"],
+    migrations: ["src/migrations/**/*.{ts,js}"],
 });
 
 AppDataSource.initialize()
     .then(() => {
-        // here you can start to work with your database
+        if (!isTestEnv) {
+            console.log("Database connection established");
+        }
     })
-    .catch((error) => console.log(error))
+    .catch((error) => console.error("Database connection error:", error));
 
 export default AppDataSource;
