@@ -2,8 +2,9 @@ import request from 'supertest';
 import app from '../../../index'; // Import the Express app
 import { Account } from '../../../src/entities/Account'; // Import your Account entity
 import { AccountType } from '../../enums/AccountType';
+import AppDataSource from '../../../typeorm.config'; // Import your TypeORM DataSource
 
-jest.useFakeTimers();
+
 jest.mock('../../entities/Account');
 
 describe('POST /api/acount', () => {
